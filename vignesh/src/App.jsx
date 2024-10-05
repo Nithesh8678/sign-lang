@@ -59,13 +59,11 @@ const SignLanguageDictionary = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // Get unique categories for filter buttons
   const categories = [
     "All",
     ...new Set(signDictionary.map((item) => item.category)),
   ];
 
-  // Filter signs based on search term and category
   const filteredSigns = signDictionary.filter((sign) => {
     const matchesSearch =
       sign.word.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -76,8 +74,8 @@ const SignLanguageDictionary = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <div className="max-w-6xl mx-auto flex-grow p-6">
         {/* Header */}
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
@@ -90,7 +88,6 @@ const SignLanguageDictionary = () => {
 
         {/* Search and Filters */}
         <div className="mb-8 space-y-4">
-          {/* Search Input */}
           <div className="max-w-md mx-auto">
             <input
               type="text"
@@ -129,16 +126,13 @@ const SignLanguageDictionary = () => {
               className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg
                        transition-transform duration-300 hover:-translate-y-1"
             >
-              {/* Image Container */}
               <div className="h-64 overflow-hidden">
                 <img
                   src={sign.image}
-                  alt={`Sign for ${sign.word}`}
+                  alt={`Sign for ${sign.word}`} // Fixed template literal
                   className="w-full h-full object-contain bg-gray-50"
                 />
               </div>
-
-              {/* Content */}
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-semibold text-gray-800">
@@ -154,7 +148,6 @@ const SignLanguageDictionary = () => {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredSigns.length === 0 && (
           <div className="text-center py-12">
             <p className="text-xl text-gray-600">
